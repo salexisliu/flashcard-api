@@ -26,8 +26,8 @@ ActiveRecord::Schema.define(version: 2021_10_01_221722) do
 
   create_table "flashcards", force: :cascade do |t|
     t.bigint "deck_id", null: false
-    t.string "term"
-    t.string "definition"
+    t.string "word"
+    t.string "translation"
     t.boolean "learned"
     t.string "language"
     t.datetime "created_at", precision: 6, null: false

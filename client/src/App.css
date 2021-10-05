@@ -1,10 +1,31 @@
+body {
+  background-color: #473d50;
+
+}
 .App {
-  text-align: center;
+  background-color: rgba(255,255,255, 0.95);
+  width: 80%;
+  margin: 2em auto;
+  padding: 2em;
+  min-height: 100vh;
 }
 
 .App-logo {
   height: 40vmin;
   pointer-events: none;
+}
+
+form input, form textarea {
+  width: 16rem;
+  padding: 0.5rem;
+  max-width: 85%;
+}
+
+form label {
+  display: inline-block;
+  width: 6rem;
+  vertical-align: top;
+  padding: 0.5rem;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -36,3 +57,22 @@
     transform: rotate(360deg);
   }
 }
+
+nav {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  min-height: 10vh;
+  background: rgb(95, 95, 177);
+}
+
+.navlink {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  color:rgba(255,255,255, 0.95)
+ 
+}
+
+
+
