@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
-  resources :flashcards, only: [:index]
-  resources :decks, only: [:index]
+  resources :flashcards
+  resources :decks
 
   post "/login", to: "sessions#create"
   delete "/logout", to: "sessions#destroy"
