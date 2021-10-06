@@ -1,8 +1,9 @@
 import './App.css';
 import NavBar from './NavBar'
 import DecksContainer from './components/DecksContainer'
-import { Switch, Route, NavLink, useHistory } from 'react-router-dom'
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import CreateDeckForm from './components/CreateCardForm';
+import DeckPage from './components/DeckPage'
 
 function AuthenticatedApp({ currentUser, setCurrentUser }) {
   // const history = useHistory()
@@ -20,6 +21,7 @@ function AuthenticatedApp({ currentUser, setCurrentUser }) {
       })
   }
   return (
+    <Router>
     <div className="App">
       <nav>
         <span>
@@ -28,17 +30,22 @@ function AuthenticatedApp({ currentUser, setCurrentUser }) {
         <span>Logged in as {currentUser.username} <button onClick={handleLogout}>Logout</button></span>
       </nav>
       <Switch>
-        <Route path="/decks">
+        <Route exact path="/decks">
           <DecksContainer />
         </Route>
         <Route path="/flashcard">
           {/* <EventsContainer /> */}
         </Route>
+        <Route exact path="/decks/:id">
+          <DeckPage/>
+        </Route>
         <Route path="/new">
           <CreateDeckForm />
         </Route>
       </Switch>
+
     </div>
+    </Router>
   );
 }
 

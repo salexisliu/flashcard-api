@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function CreateDeckForm() {
+function CreateCardForm() {
   const classes = useStyles();
   const [inputField, setInputField] = useState([{ word: "" }]);
   const [definitions, setDefinitions] = useState([]);
@@ -203,4 +203,4 @@ function CreateDeckForm() {
     </>
   );
 }
-export default CreateDeckForm;
+export default CreateCardForm;
