@@ -11,7 +11,6 @@ class DecksController < ApplicationController
   end
 
   def show
-
       render json: @deck.to_json(
         include: {
           flashcards: { 

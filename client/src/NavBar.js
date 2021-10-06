@@ -13,6 +13,8 @@ function NavBar() {
 <br></br><p></p>
   <NavLink className="navlink" to="/">Home</NavLink>
 
+  <NavLink className="navlink" to="/new">New Card </NavLink>
+
   </nav>
 </>
   )

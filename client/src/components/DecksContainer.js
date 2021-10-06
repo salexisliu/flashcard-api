@@ -55,11 +55,11 @@ const deleteDeck = (id) => {
       <h1>Decks</h1>
 
       {decks.map((deck) => (
-
 <>
         <p>{deck.title}</p>
-        <Link to={`/decks/${deck.id}`}><p>See more</p></Link>
-        <Button onClick={()=> deleteDeck(deck.id)}>Delete</Button>
+        <Link to={`/decks/${deck.id}`}><p>See cards</p></Link>
+
+        <Button onClick={()=> deleteDeck(deck.id)}>Delete Deck</Button>
         </>
      
       ))}

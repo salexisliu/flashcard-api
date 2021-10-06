@@ -22,6 +22,12 @@ class FlashcardsController < ApplicationController
     end
   end
 
+  def destroy
+    card = Flashcard.find(params[:id])
+    card.destroy
+    render json: card, status: :ok
+  end
+
   private
 
   def card_params

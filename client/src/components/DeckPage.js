@@ -1,18 +1,57 @@
 
 import React, { useState, useEffect } from "react";
 import Container from "@material-ui/core/container"
-import { NavLink } from "react-router-dom";
-import { useParams } from 'react-router-dom';
+import Cards from "./-editCards"
 
-function DeckPage() {
+function DeckPage({ deckId }) {
 
-  // const { id } = useParams();
+  console.log(deckId)
 
+  const [deck, setDeck] = useState({ flashcards: [] })
+  const [cards, setCards] = useState([])
+
+  useEffect(() => {
+    fetchDeck();
+  }, []);
+
+  const fetchDeck = () => {
+    fetch(`/decks/${deckId}`)
+      .then(res => res.json())
+      .then(data => setDeckandCards(data))
+  }
+
+  const setDeckandCards = (data) => {
+    setDeck(data)
+    setCards(data.flashcards)
+  }
+
+  const deleteCard = (cardId) => {
+
+    console.log(cardId)
+
+    fetch(`http://localhost:4000/flashcards/${cardId}`, {
+      method: 'DELETE',
+    })
+      .then(res => {
+        if (res.ok) {
+          const updatedCards = cards.filter(card => card.id !== cardId)
+          setCards(updatedCards)
+        }
+      })
+  }
+
+  console.log("flashcards from the deck fetch", cards)
+
+
+  console.log("deck", deck)
   return (<Container>
 
-    <h1>deck page</h1> 
+    <h2>Deck title: {deck.title} </h2>
 
-    <NavLink className="navlink" to="/new">Create new cards</NavLink>
+    <h4> Deck cards</h4>
+
+    <Cards flashcards={cards} deleteCard={deleteCard} deckId = {deckId} />
+
 
   </Container>
   );

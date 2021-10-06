@@ -2,7 +2,7 @@ import './App.css';
 import NavBar from './NavBar'
 import DecksContainer from './components/DecksContainer'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import CreateDeckForm from './components/CreateCardForm';
+import CreateCardForm from './components/CreateCardForm';
 import DeckPage from './components/DeckPage'
 
 function AuthenticatedApp({ currentUser, setCurrentUser }) {
@@ -36,11 +36,13 @@ function AuthenticatedApp({ currentUser, setCurrentUser }) {
         <Route path="/flashcard">
           {/* <EventsContainer /> */}
         </Route>
-        <Route exact path="/decks/:id">
-          <DeckPage/>
-        </Route>
+
+        <Route exact path="/decks/:id"
+            render={({match}) => {return <DeckPage deckId={match.params.id}/>}} />
+            
+    
         <Route path="/new">
-          <CreateDeckForm />
+          <CreateCardForm />
         </Route>
       </Switch>
 

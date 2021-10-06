@@ -17,25 +17,15 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function CreateCardForm() {
+function CreateCardForm({deckId}) {
   const classes = useStyles();
   const [inputField, setInputField] = useState([{ word: "" }]);
   const [definitions, setDefinitions] = useState([]);
   const [cards, setCards] = useState([]);
 
-  // const createCard = (DATAOBJ) => {
-  // fetch("/cards") POST the object to the backend to create a card
-  //}
-
   const handleSubmit = (e) => {
-    // const DATAOBJ = {
-    //   word: inputField,
-    //   definition: inputField,
-    //   deck_id: 1
-    // }
-    // e.preventDefault();
 
-    // something.iterate createCard(something)
+
 
     console.log("inputfields", inputField);
     console.log("definitions", definitions);
@@ -46,7 +36,7 @@ function CreateCardForm() {
       const innerDataObject = {
         word: inputField[idx]["word"],
         definition: definitions[idx],
-        deck_id: 1,
+        deck_id: deckId,
       };
       // innerDataObject.word = inputField[idx]['word']
       // innerDataObject.definition = definitions[idx]
@@ -78,27 +68,6 @@ function CreateCardForm() {
       setCards(cards.concat(card))
     })
   };
-
-  // function createCardObj(word) {
-  //   const obj = {
-  //     word: inputField.word,
-  //     definition: definitions,
-  //     deck_id: 1,
-  //   }
-
-  // const cardObj = {
-  //   word: inputField[0].word,
-  //   definition: translatedWords[0],
-  //   deck_id: 1
-  // }
-  // console.log(cardObj)
-  //Send function send to backend
-  // createCard({
-  //   word: WORD ,
-  //   description: DESC,
-  //   deck_id: 1/currentdeck?,
-
-  // })
 
   const handleGetDefinition = (e) => {
     e.preventDefault();
