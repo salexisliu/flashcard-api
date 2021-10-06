@@ -19,13 +19,11 @@ const useStyles = makeStyles((theme) => ({
 
 function CreateCardForm({deckId}) {
   const classes = useStyles();
-  const [inputField, setInputField] = useState([{ word: "" }]);
+  const [inputField, setInputField] = useState([{ word: "" }, { word: "" }]);
   const [definitions, setDefinitions] = useState([]);
   const [cards, setCards] = useState([]);
 
   const handleSubmit = (e) => {
-
-
 
     console.log("inputfields", inputField);
     console.log("definitions", definitions);

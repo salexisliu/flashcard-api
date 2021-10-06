@@ -57,9 +57,9 @@ const deleteDeck = (id) => {
       {decks.map((deck) => (
 <>
         <p>{deck.title}</p>
-        <Link to={`/decks/${deck.id}`}><p>See cards</p></Link>
+        <Link to={`/decks/${deck.id}`}><p>See more</p></Link>
 
-        <Button onClick={()=> deleteDeck(deck.id)}>Delete Deck</Button>
+        <Button onClick={()=> deleteDeck(deck.id)}>Delete</Button>
         </>
      
       ))}

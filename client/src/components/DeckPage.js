@@ -1,7 +1,8 @@
 
 import React, { useState, useEffect } from "react";
 import Container from "@material-ui/core/container"
-import Cards from "./-editCards"
+import Cards from "./Cards"
+
 
 function DeckPage({ deckId }) {
 
@@ -42,6 +43,11 @@ function DeckPage({ deckId }) {
 
   console.log("flashcards from the deck fetch", cards)
 
+  // not using this
+
+  const addCard = (card) => {
+    setCards([...cards, card])
+  }
 
   console.log("deck", deck)
   return (<Container>
@@ -50,7 +56,7 @@ function DeckPage({ deckId }) {
 
     <h4> Deck cards</h4>
 
-    <Cards flashcards={cards} deleteCard={deleteCard} deckId = {deckId} />
+    <Cards flashcards={cards} deleteCard={deleteCard} deckId = {deckId} addCard={addCard}/>
 
 
   </Container>

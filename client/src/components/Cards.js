@@ -1,54 +1,43 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import CreateCardForm from "./CreateCardForm";
 import Button from "@material-ui/core/Button";
 
-function Cards({ deckId }) {
-  const [cards, setCards] = useState([]);
 
-  console.log("cards page deck id", deckId);
+function Cards({flashcards, deckId, deleteCard, addCard}) {
 
-  useEffect(() => {
-    fetchCards();
-  }, [cards]);
 
-  const fetchCards = () => {
-    fetch(`/decks/${deckId}`)
-      .then((res) => res.json())
-      .then((deck) => setCards(deck.flashcards));
-  };
+  //flashcards comes from DeckPage deck fetch
 
-  const deleteCard = (cardId) => {
-    console.log(cardId);
+  
+  return (<>
+   <div> {flashcards.map(card =>
+   <>
 
-    fetch(`http://localhost:4000/flashcards/${cardId}`, {
-      method: "DELETE",
-    }).then((res) => {
-      if (res.ok) {
-        const updatedCards = cards.filter((card) => card.id !== cardId);
-        setCards(updatedCards);
-      }
-    });
-  };
+       <h4>{card.word}</h4>
+       <h5>definition: {card.definition}</h5>
 
-  console.log("flashcards", cards);
+     
+     <Button onClick={() => deleteCard(card.id)}> Delete </Button>
 
-  return (
-    <>
-      {deckId}
-      <div>
-        {" "}
-        {cards.map((card) => (
-          <>
-            <h3>{card.word}</h3>
-            <h4>{card.definition}</h4>
-
-            <Button onClick={() => deleteCard(card.id)}> Delete </Button>
-          </>
-        ))}
+     </>
+   )
+     }
       </div>
-      new card page
-    </>
-  );
-}
+  
+
+
+
+    <Link to={`/decks/${deckId}/edit`}><h4> Add New Cards? </h4></Link>
+{/*     
+
+   <CreateCardForm deckId = {deckId} addCard = {addCard}/> */}
+
+
+  </>
+  )
+
+    }
+
 
 export default Cards;

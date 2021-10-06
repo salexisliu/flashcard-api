@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect } from "react";
 import Container from "@material-ui/core/container"
-import Cards from "./Cards"
+import Cards from "./XXCards"
 
 function DeckPage({deckId}) {
 

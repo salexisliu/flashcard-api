@@ -40,6 +40,10 @@ function AuthenticatedApp({ currentUser, setCurrentUser }) {
         <Route exact path="/decks/:id"
             render={({match}) => {return <DeckPage deckId={match.params.id}/>}} />
             
+          <Route path="/decks/:id/edit"
+           render={({ match }) => {
+             return <CreateCardForm deckId={match.params.id}/>}} />
+  
     
         <Route path="/new">
           <CreateCardForm />
