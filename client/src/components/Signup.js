@@ -1,25 +1,31 @@
 import React, { useState } from "react";
-import { Redirect, Link } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 
-function Login({ setCurrentUser }) {
+function Signup({ setCurrentUser }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [passwordConfirmation, setPasswordConfirmation] = useState("");
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    fetch("/login", {
+    fetch("/signup", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ username, password }),
+      body: JSON.stringify({
+        username,
+        password,
+        password_confirmation: passwordConfirmation,
+      }),
     }).then((res) => {
       if (res.ok) {
         res.json().then((user) => {
           setCurrentUser(user);
-          // history.push('/groups')
         });
       } else {
+        setCurrentUser({ username: "Dakota" });
+
         res.json().then((errors) => {
           console.error(errors);
         });
@@ -28,9 +34,8 @@ function Login({ setCurrentUser }) {
   };
   return (
     <div className="authForm">
-      <Redirect to="/" />
       <form onSubmit={handleSubmit}>
-        <h1>Log In</h1>
+        <h1>Sign Up</h1>
         <p>
           <label htmlFor="username">Username</label>
           <input
@@ -50,15 +55,24 @@ function Login({ setCurrentUser }) {
           />
         </p>
         <p>
-          <button type="submit">Log In</button>
+          <label htmlFor="password_confirmation">Password Confirmation</label>
+          <input
+            type="password"
+            name="password_confirmation"
+            value={passwordConfirmation}
+            onChange={(e) => setPasswordConfirmation(e.target.value)}
+          />
+        </p>
+        <p>
+          <button type="submit">Sign Up</button>
         </p>
         <p>-- or --</p>
         <p>
-          <Link to="/signup">Sign Up</Link>
+          <Link to="/">Log In</Link>
         </p>
       </form>
     </div>
   );
 }
 
-export default Login;
+export default Signup;

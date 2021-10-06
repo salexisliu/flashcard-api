@@ -1,14 +1,9 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from "react";
 
-import { Link } from 'react-router-dom';
-
+import { Link } from "react-router-dom";
 
 function DecksContainer() {
-
-  return (
-    <div>a place to put my decks</div>
-  )
-
+  return <div>a place to put my decks</div>;
 }
 
-export default DecksContainer
+export default DecksContainer;

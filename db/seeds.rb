@@ -8,9 +8,11 @@
 
 "starting..."
 d1 = Deck.create(user_id: User.first.id, title: "Japanese I", cover_url: "coverurl")
+d2 = Deck.create(user_id: User.first.id, title: "second deck", cover_url: "coverurl")
 
-f1 = Flashcard.create(deck_id: 1, word: "hello", translation: "こんにちわ", language: "japanese")
-f2 = Flashcard.create(deck_id: 1, word: "how are you", translation: "お元気ですか", language: "japanese")
-f3 = Flashcard.create(deck_id: 1, word: "thanks", translation: "こんにちわ", language: "japanese")
+f1 = Flashcard.create(deck_id: 1, word: "hello", definition: "こんにちわ", language: "japanese")
+f2 = Flashcard.create(deck_id: 1, word: "how are you", definition: "お元気ですか", language: "japanese")
+f3 = Flashcard.create(deck_id: 2, word: "dog", definition: "animal", language: "english")
+f3 = Flashcard.create(deck_id: 2, word: "computer", definition: "machine", language: "english")
 
 "finished seeding :) "
