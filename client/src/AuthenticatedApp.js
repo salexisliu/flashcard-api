@@ -2,7 +2,7 @@ import './App.css';
 import NavBar from './NavBar'
 import DecksContainer from './components/DecksContainer'
 import { Switch, Route, NavLink, useHistory } from 'react-router-dom'
-import CreateDeckForm from './components/CreateDeckForm';
+import CreateDeckForm from './components/CreateCardForm';
 
 function AuthenticatedApp({ currentUser, setCurrentUser }) {
   // const history = useHistory()

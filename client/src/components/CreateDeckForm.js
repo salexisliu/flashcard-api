@@ -1,141 +1,50 @@
-import React, { useState, useEffect } from "react";
 import TextField from "@mui/material/TextField";
 import { Link } from "react-router-dom";
 import Container from "@mui/material/Container";
-import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
-import RemoveIcon from "@material-ui/icons/Remove";
-import AddIcon from "@material-ui/icons/Add";
+import React, { useState, useEffect } from "react";
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    "& .MuiTextField-root": {
-      margin: theme.spacing(1),
-    },
-  },
-}));
+function CreateDeckForm({createDeck}) {
 
-function CreateDeckForm() {
-  const classes = useStyles();
-  const [inputField, setInputField] = useState([{ word: "" }]);
-  const [translatedWords, setTranslatedWords] = useState([]);
+  const [title, setTitle] = useState([])
 
-  // useEffect 
-  // [translatedWords]
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-   ;
-  }
+  console.log(title)
 
 
-  console.log("translatedWords", translatedWords)
+  const handleSubmitForm = (e) => { 
+    e.preventDefault()
+    createDeck({
+      title: title
+    })
 
-  const handleTranslate = (e) => {
-    e.preventDefault();
-
-    console.log("inputfields", inputField)
-    Promise.all(inputField.map(input => fetch(`https://www.dictionaryapi.com/api/v3/references/collegiate/json/${input.word}?key=b033b3b4-4766-4db1-8f40-6af316839bf5`)))
-      .then(results => Promise.all(results.map(r => r.json())))
-      .then(results => setTranslatedWords(results.map(result => result[0].shortdef[0])))
-    
-  }
-
-  
-  // const translate = (input) => {
-  //   debugger
-  //   console.log("input word", input.word)
-  //   let fetchedword = fetch(`https://www.dictionaryapi.com/api/v3/references/collegiate/json/${input.word}?key=b033b3b4-4766-4db1-8f40-6af316839bf5`)
-  //     .then(res => res.json())
-  //     .then(data => {setTranslatedWords([...translatedWords, data[0].shortdef[0]])})
-
-  // const fetchTranslations = (word) => {
-
-  //   return fetch(`https://www.dictionaryapi.com/api/v3/references/collegiate/json/${word}?key=b033b3b4-4766-4db1-8f40-6af316839bf5`)
-  //   .then(res => res.json())
-  //   .then(data => ((data[0].shortdef[0])))
-
-  //   // const dict = {word: v}
-  //   // return dict
-    
-  // }
-
-  const handleAddField = () => {
-    setInputField([...inputField, { word: "" }]);
   };
-
-  const handleRemoveField = (index) => {
-    const values = [...inputField];
-    values.splice(index, 1);
-    setInputField(values);
-  };
-
-  const handleChangeInput = (index, event) => {
-    const values = [...inputField];
-    values[index][event.target.name] = event.target.value;
-    setInputField(values);
-
-    // console.log(index, event.target.name);
-  };
-
   return (
-    <>
-      <Container>
-        <h3>Add new word</h3>
 
-        <form className={classes.root} onSubmit={handleSubmit}>
-          {inputField.map((inputField, index) => (
-            <div key={index}>
+      <Container>
+        <h3>Make a Deck</h3>
+
+        <form onSubmit={handleSubmitForm}>
+       
               <TextField
                 name="word"
                 variant="standard"
-                label="enter a word"
-                value={inputField.word} //from name
-                onChange={(event) => handleChangeInput(index, event)}
+                label="enter a title"
+                value={title} //from name
+                onChange={(e) => setTitle(e.target.value)}
                 type="text"
               />
-
-              <IconButton onClick={() => handleRemoveField(index)}>
-                <RemoveIcon />
-              </IconButton>
-              <IconButton onClick={() => handleAddField()}>
-                <AddIcon />
-              </IconButton>
-            </div>
-          ))}
-         
-
           <Button
             variant="contained"
             color="primary"
             type="submit"
-            onClick={handleTranslate}
           >
-
-            Translate
+            Submit
           </Button>
-
-
-          
         </form>
       </Container>
-      <br></br>
-      <Container>
-        <Button
-          variant="contained"
-          color="primary"
-          type="submit"
-          onClick={handleSubmit}
-        >
-          Send
-        </Button>
-      </Container>
-  
 
-   
-    </>
-  );
+  )
 }
 
 export default CreateDeckForm;

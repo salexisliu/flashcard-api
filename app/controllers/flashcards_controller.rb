@@ -1,13 +1,20 @@
 class FlashcardsController < ApplicationController
 
+  # get rid of this skip before action later
+   skip_before_action :confirm_authentication 
+   before_action :find_card, only: [:show]
+  
   def index
     flashcards = Flashcard.all
     render json: flashcards
   end
 
+ def show
+    render json: @card
+  end
+
   def create
-    current_deck = Deck.find(params[:id])
-    flashcard = current_deck.flashcards.new(card_params)
+    flashcard = Flashcard.new(card_params)
     if flashcard.save
       render json: flashcard, status: :created
     else

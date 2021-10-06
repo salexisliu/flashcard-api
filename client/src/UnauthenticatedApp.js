@@ -1,7 +1,7 @@
 import React from 'react'
 import { Switch, Route, Redirect } from 'react-router-dom'
 import Login from './components/Login'
-// import Signup from './components/Signup'
+import Signup from './components/Signup'
 
 function UnauthenticatedApp({ setCurrentUser }) {
   return (
@@ -12,7 +12,7 @@ function UnauthenticatedApp({ setCurrentUser }) {
         <Login setCurrentUser={setCurrentUser} />
       </Route>
       <Route exact path="/signup">
-        {/* <Signup setCurrentUser={setCurrentUser} /> */}
+        <Signup setCurrentUser={setCurrentUser} />
         <h1>signup page</h1>
       </Route>
       <Redirect to="/" />
