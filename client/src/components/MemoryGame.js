@@ -3,12 +3,14 @@ import React, { useState, useEffect } from "react";
 import { useHistory, useParams} from 'react-router-dom';
 import { useLocation } from 'react-router-dom'
 import Button from "@mui/material/Button";
-import Container from "@mui/material/Container";
 import { Link } from "react-router-dom";
 import Card from '@mui/material/Card';
 import CardActionArea from '@mui/material/CardActionArea';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
+import Typography from '@mui/material/Typography';
+import Grid from '@mui/material/Grid';
+import Container from '@mui/material/Container';
 
 
 function MemoryGame() {
@@ -54,16 +56,39 @@ function toggle(){
    <h1>Study</h1>
    <Container>
 
+        <Card sx={{ maxWidth: 1200 }}>
+          <CardActionArea>
+            <CardContent>
+            <h2>{fcard.definition} </h2>
+              <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+                
+               
+              </Typography>
+              <Typography variant="h5" component="div">
+              {isToggled && (<>{fcard.word}</>)}
+              </Typography>
+              <Typography sx={{ mb: 1.5 }} color="text.secondary">
 
-    <Card> Deck</Card>
+              </Typography>
 
-      <h2>{fcard.definition} </h2>
-      {isToggled && <h2>Answer: {fcard.word} </h2>}
+            </CardContent>
+          </CardActionArea>
+          <CardActions>
+            <Container>
+             
+              <Button onClick={toggle}> Show Answer </Button>
 
-      <Button onClick={toggle}> Show Answer </Button>
 
-  
-      <Button onClick={handleClick}> Next Card </Button>
+              <Button onClick={handleClick}> Next Card </Button>
+            </Container>
+          </CardActions>
+        </Card>
+ 
+
+
+
+
+
 
    </Container>
 
