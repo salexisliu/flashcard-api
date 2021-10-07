@@ -9,31 +9,31 @@ body {
   padding: 2em;
   min-height: 100vh;
 }
-
+/* 
 .App-logo {
   height: 40vmin;
   pointer-events: none;
-}
+} */
 
-form input, form textarea {
+/* form input, form textarea {
   width: 16rem;
   padding: 0.5rem;
   max-width: 85%;
-}
+} */
 
-form label {
+/* form label {
   display: inline-block;
   width: 6rem;
   vertical-align: top;
   padding: 0.5rem;
-}
+} */
 
-@media (prefers-reduced-motion: no-preference) {
+/* @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
   }
-}
-
+} */
+/* 
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
@@ -43,19 +43,10 @@ form label {
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
-}
+} */
 
 .App-link {
   color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
 }
 
 nav {
@@ -69,6 +60,7 @@ nav {
 .navlink {
   display: flex;
   justify-content: flex-start;
+   justify-content: space-between;
   align-items: center;
   color:rgba(255,255,255, 0.95)
  

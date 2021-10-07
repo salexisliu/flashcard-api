@@ -3,7 +3,9 @@ import NavBar from './NavBar'
 import DecksContainer from './components/DecksContainer'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import CreateCardForm from './components/CreateCardForm';
+// import ExampleCardForm from './components/ExampleCardForm';
 import DeckPage from './components/DeckPage'
+import MemoryGame from './components/MemoryGame'
 
 function AuthenticatedApp({ currentUser, setCurrentUser }) {
   // const history = useHistory()
@@ -33,21 +35,21 @@ function AuthenticatedApp({ currentUser, setCurrentUser }) {
         <Route exact path="/decks">
           <DecksContainer />
         </Route>
-        <Route path="/flashcard">
-          {/* <EventsContainer /> */}
-        </Route>
+       
 
         <Route exact path="/decks/:id"
             render={({match}) => {return <DeckPage deckId={match.params.id}/>}} />
-            
-          <Route path="/decks/:id/edit"
-           render={({ match }) => {
-             return <CreateCardForm deckId={match.params.id}/>}} />
-  
+          
+        <Route path="/decks/:id/edit"
+          render={({ match }) => {
+            return <CreateCardForm deckId={match.params.id}/>}} />
+
+          <Route path="/decks/:id/quiz"
+            render={({ match }) => {
+              return <MemoryGame deckId={match.params.id} />
+            }} />
+
     
-        <Route path="/new">
-          <CreateCardForm />
-        </Route>
       </Switch>
 
     </div>

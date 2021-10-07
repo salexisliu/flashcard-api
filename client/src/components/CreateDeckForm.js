@@ -16,13 +16,13 @@ function CreateDeckForm({ createDeck }) {
   };
   return (
     <Container>
-      <h3>Make a Deck</h3>
+      <h3>Create a new Deck</h3>
 
       <form onSubmit={handleSubmitForm}>
         <TextField
           name="word"
           variant="standard"
-          label="enter a title"
+          label="enter title"
           value={title} //from name
           onChange={(e) => setTitle(e.target.value)}
           type="text"

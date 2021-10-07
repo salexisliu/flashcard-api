@@ -3,6 +3,8 @@ import { Link} from "react-router-dom";
 import CreateDeckForm from "./CreateDeckForm";
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
+import Deck from "./Deck"
+import Grid from '@mui/material/Grid';
 
 function DecksContainer() {
   useEffect(() => {
@@ -50,24 +52,38 @@ const deleteDeck = (id) => {
     })
   }
 
-  return (
+  return (<>
     <Container>
+      
+
+      <CreateDeckForm createDeck={createDeck} />
       <h1>Decks</h1>
 
-      {decks.map((deck) => (
-<>
-        <p>{deck.title}</p>
-        <Link to={`/decks/${deck.id}`}><p>See more</p></Link>
+      <Grid
+        container
+        spacing={2}
+        direction="row"
+        justify="flex-start"
+        alignItems="flex-start"
+      >
 
-        <Button onClick={()=> deleteDeck(deck.id)}>Delete</Button>
+      {decks.map((deck) => (
+      <>
+        <Deck deck={deck} deleteDeck={deleteDeck}/>
         </>
-     
       ))}
 
-      <CreateDeckForm createDeck={createDeck}/>
+      </Grid>
+
+
+
+
+         
+     </Container>
+
+ </>
 
      
-    </Container>
   );
 }
 

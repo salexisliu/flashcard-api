@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import TextField from "@mui/material/TextField";
-
-import { Link } from "react-router-dom";
 import Container from "@mui/material/Container";
 import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
 import RemoveIcon from "@material-ui/icons/Remove";
 import AddIcon from "@material-ui/icons/Add";
+import { useHistory } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -19,8 +19,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function CreateCardForm({deckId}) {
+  const history = useHistory();
   const classes = useStyles();
-  const [inputField, setInputField] = useState([{ word: "" }, { word: "" }]);
+  const [inputField, setInputField] = useState([{ word: "" }]);
   const [definitions, setDefinitions] = useState([]);
   const [cards, setCards] = useState([]);
 
@@ -31,10 +32,10 @@ function CreateCardForm({deckId}) {
 
     const DATAOBJ = [];
 
-    for (let idx = 0; idx < definitions.length; idx++) {
+    for (let i = 0; i < definitions.length; i++) {
       const innerDataObject = {
-        word: inputField[idx]["word"],
-        definition: definitions[idx],
+        word: inputField[i]["word"],
+        definition: definitions[i],
         deck_id: deckId,
       };
       // innerDataObject.word = inputField[idx]['word']
@@ -45,7 +46,12 @@ function CreateCardForm({deckId}) {
     }
 
     DATAOBJ.map((obj) => createCard(obj));
+
+
+
+
   };
+
 
   const createCard = (obj) => {
     console.log(obj);
@@ -67,6 +73,9 @@ function CreateCardForm({deckId}) {
       setCards(cards.concat(card))
     })
   };
+
+  console.log("end card result", cards)
+
 
   const handleGetDefinition = (e) => {
     e.preventDefault();
@@ -150,7 +159,7 @@ function CreateCardForm({deckId}) {
           <Button
             variant="contained"
             color="primary"
-            type="submit"
+            type="button"
             onClick={handleGetDefinition}
           >
             Define
@@ -165,9 +174,20 @@ function CreateCardForm({deckId}) {
           type="submit"
           onClick={handleSubmit}
         >
-          Join and Send
+          Send
         </Button>
+
+        <Link to={`/decks/${deckId}`}>
+        <Button
+          variant="contained"
+          color="primary"
+          type="button"
+        >
+          Back to Deck
+        </Button>
+        </Link>
       </Container>
+     
     </>
   );
 }
