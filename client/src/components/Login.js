@@ -1,9 +1,11 @@
 import React, { useState } from "react";
-import { Redirect, Link } from "react-router-dom";
+import { Redirect, useHistory, Link } from 'react-router-dom'
 
 function Login({ setCurrentUser }) {
+  
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const history = useHistory()
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -17,7 +19,7 @@ function Login({ setCurrentUser }) {
       if (res.ok) {
         res.json().then((user) => {
           setCurrentUser(user);
-          // history.push('/groups')
+          history.push('/decks')
         });
       } else {
         res.json().then((errors) => {

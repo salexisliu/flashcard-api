@@ -6,6 +6,7 @@ import CreateCardForm from './components/CreateCardForm';
 // import ExampleCardForm from './components/ExampleCardForm';
 import DeckPage from './components/DeckPage'
 import MemoryGame from './components/MemoryGame'
+import Home from './components/Home'
 
 function AuthenticatedApp({ currentUser, setCurrentUser }) {
   // const history = useHistory()
@@ -35,7 +36,10 @@ function AuthenticatedApp({ currentUser, setCurrentUser }) {
         <Route exact path="/decks">
           <DecksContainer />
         </Route>
-       
+      
+        <Route exact path="/">
+         <Home /> </Route>
+
 
         <Route exact path="/decks/:id"
             render={({match}) => {return <DeckPage deckId={match.params.id}/>}} />

@@ -49,8 +49,6 @@ body {
   color: #61dafb;
 }
 
-
-
 nav {
   display: flex;
   justify-content: space-around;
@@ -64,8 +62,9 @@ nav {
   justify-content: flex-start;
    justify-content: space-between;
   align-items: center;
-  color:rgba(255,255,255, 0.95)
- 
+  color:rgba(255,255,255, 0.95);
+ padding-left:30px;
+  padding-right:30px;
 }
 
 

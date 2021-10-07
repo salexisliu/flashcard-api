@@ -13,7 +13,6 @@ function NavBar() {
 
   <NavLink className="navlink" to="/">Home</NavLink>
 
-  <NavLink className="navlink" to="/new">New Card </NavLink>
 
   </nav>
 </>

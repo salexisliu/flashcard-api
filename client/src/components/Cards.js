@@ -8,7 +8,9 @@ function Cards({flashcards, deckId, deleteCard, addCard}) {
 
 
   //flashcards comes from DeckPage deck fetch
-
+console.log("flashobject", flashcards)
+  console.log("flash", flashcards[1])
+  console.log("fword", flashcards[1])
   
   return (<>
    <div> {flashcards.map(card =>
