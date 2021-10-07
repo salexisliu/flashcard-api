@@ -46,6 +46,7 @@ function CreateCardForm({deckId}) {
     }
 
     DATAOBJ.map((obj) => createCard(obj));
+    
 
 
 
@@ -73,9 +74,6 @@ function CreateCardForm({deckId}) {
       setCards(cards.concat(card))
     })
   };
-
-  console.log("end card result", cards)
-
 
   const handleGetDefinition = (e) => {
     e.preventDefault();

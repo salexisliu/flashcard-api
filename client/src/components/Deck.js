@@ -8,15 +8,18 @@ import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
+import Container from '@mui/material/Container';
+import MemoryGame from './MemoryGame';
 import { useHistory } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 
 function Deck({deck, deleteDeck}) {
   const history = useHistory();
 
-  const playGame = () => {
-   
-    history.push(`/decks/${deck.id}/quiz`)
+  const playGame = (deck) => {
+
+<h1>game</h1>
   }
   console.log(deck)
   return (<>
@@ -24,7 +27,7 @@ function Deck({deck, deleteDeck}) {
       item
       xs={3}>
       <Card sx={{ maxWidth: 345 }}>
-      <Link underline="none" to={`/decks/${deck.id}`}><CardActionArea>
+        <Link style={{ textDecoration: 'none' }} to={`/decks/${deck.id}`}><CardActionArea>
       <CardContent>
     
         <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
@@ -40,10 +43,16 @@ function Deck({deck, deleteDeck}) {
       </CardContent>
         </CardActionArea></Link>
       <CardActions>
-      
-
-        <Button onClick={() => playGame(deck.id)}>PlayGame</Button>
+      <Container>
+      <Route exact path="/:id/quiz" deck={deck} />
+          <Link style={{ textDecoration: 'none' }} to={{
+            pathname: `/decks/${deck.id}/quiz`,
+            state: {deck}
+       }}
+>
+         <Button>Study</Button> </Link>
         <Button onClick={() => deleteDeck(deck.id)}>Delete</Button>
+            </Container>
       </CardActions>
     </Card>
     </Grid>

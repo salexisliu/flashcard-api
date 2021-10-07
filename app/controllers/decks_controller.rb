@@ -7,7 +7,14 @@ class DecksController < ApplicationController
 
   def index
     decks = current_user.decks.all
-    render json: decks
+    render json: decks.to_json(
+        include: {
+          flashcards: { 
+            except: [
+              :created_at
+            ]
+         }}
+      )
   end
 
   def show
