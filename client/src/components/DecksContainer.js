@@ -7,11 +7,14 @@ import Deck from "./Deck"
 import Grid from '@mui/material/Grid';
 
 function DecksContainer() {
+  const [formErrors, setFormErrors] = useState([]);
+  const [decks, setDecks] = useState([]);
+
   useEffect(() => {
     fetchDecks();
   }, []);
 
-  const [decks, setDecks] = useState([]);
+
 
   const fetchDecks = () => {
     fetch("/decks")
@@ -31,7 +34,12 @@ const createDeck = (formData) => {
       if (res.ok) {
         return res.json();
       } else {
-        return res.json().then((errors) => Promise.reject(errors));
+      //  return res.json().then((err) => setFormErrors(err));
+        return res.json()
+          .then(errors => setFormErrors(errors.title))
+        .then((errors) => Promise.reject(errors))
+       
+      
       }
     })
     .then(deck => {
@@ -56,7 +64,17 @@ const deleteDeck = (id) => {
     <Container>
       
 
-      <CreateDeckForm createDeck={createDeck} />
+      <CreateDeckForm createDeck={createDeck}
+      formErrors={formErrors}
+      setFormErrors={setFormErrors}/>
+
+      {formErrors.length > 0
+        ? formErrors.map((err) => (
+          <p key={err} style={{ color: "red" }}>
+            {err}
+          </p>
+        ))
+        : null}
      
       <h2 style={{ padding: "10px" }} >My Decks</h2>
       <Grid

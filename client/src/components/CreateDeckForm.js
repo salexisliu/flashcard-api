@@ -4,12 +4,14 @@ import Button from "@material-ui/core/Button";
 import React, { useState } from "react";
 import Box from "@mui/material/Box";
 
-function CreateDeckForm({ createDeck }) {
+function CreateDeckForm({ createDeck, setFormErrors }) {
   const [title, setTitle] = useState([]);
 
   console.log(title);
 
   const handleSubmitForm = (e) => {
+
+    setFormErrors([])
     setTitle("")
     e.preventDefault();
     createDeck({

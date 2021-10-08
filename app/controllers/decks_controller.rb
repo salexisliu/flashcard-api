@@ -1,7 +1,7 @@
 class DecksController < ApplicationController
 
   # get rid of this skip before action later
-  skip_before_action :confirm_authentication
+  # skip_before_action :confirm_authentication
   before_action :find_deck, only:  [:show, :update]
   before_action :authorize_user, only: [:show, :update]
 
@@ -14,7 +14,7 @@ class DecksController < ApplicationController
               :created_at
             ]
          }}
-      )
+      ), status: :ok
   end
 
   def show
