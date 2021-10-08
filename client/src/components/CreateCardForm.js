@@ -26,8 +26,10 @@ function CreateCardForm({deckId}) {
   const [inputField, setInputField] = useState([{ word: "" }]);
   const [definitions, setDefinitions] = useState([]);
   const [cards, setCards] = useState([]);
-
+  const [formErrors, setFormErrors] = useState("");
   const handleSubmit = (e) => {
+    e.preventDefault();
+   
 
     console.log("submiting")
     // console.log("inputfields", inputField);
@@ -49,11 +51,33 @@ function CreateCardForm({deckId}) {
     }
 
     DATAOBJ.map((obj) => createCard(obj))
-    history.push(`/decks/${deckId}`)
-
+  
+  
 
   };
 
+
+  // const createCard = (obj) => {
+  //   console.log(obj);
+  //   return fetch("/flashcards", {
+  //     method: "POST",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //     body: JSON.stringify(obj),
+  //   })
+  //   .then((res) => {
+  //     if (res.ok) {
+  //       return res.json();
+  //     } else {
+  //       return res.json().then((errors) => Promise.reject(errors));
+  //     }
+  //   })
+  //   .then(card => {
+  //     setCards(cards.concat(card));
+     
+  //   })
+  // };
 
   const createCard = (obj) => {
     console.log(obj);
@@ -64,18 +88,26 @@ function CreateCardForm({deckId}) {
       },
       body: JSON.stringify(obj),
     })
-    .then((res) => {
-      if (res.ok) {
-        return res.json();
-      } else {
-        return res.json().then((errors) => Promise.reject(errors));
-      }
-    })
-    .then(card => {
-      setCards(cards.concat(card));
-     
-    })
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        } else {
+          return res.json()
+            .then(errors => setFormErrors(errors.word))
+          .then((errors) => Promise.reject(errors))
+           
+        }
+      })
+      .then(card => {
+        setCards(cards.concat(card))
+          history.push(`/decks/${deckId}`)
+
+      })
   };
+
+
+
+
 
   const handleGetDefinition = (e) => {
     e.preventDefault();
@@ -163,6 +195,15 @@ function CreateCardForm({deckId}) {
               </IconButton>
             </div>
           ))}
+
+
+            {formErrors.length > 0
+              ? formErrors.map((err) => (
+                <p key={err} style={{ color: "red" }}>
+                  {err}
+                </p>
+              ))
+              : null}
 
           <Button
             variant="contained"
