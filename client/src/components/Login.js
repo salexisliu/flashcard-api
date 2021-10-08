@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import { Redirect, useHistory, Link } from 'react-router-dom'
+import Button from '@mui/material/Button';
+import Container from '@mui/material/Container';
+
 
 function Login({ setCurrentUser }) {
   
@@ -52,7 +55,7 @@ function Login({ setCurrentUser }) {
           />
         </p>
         <p>
-          <button type="submit">Log In</button>
+          <Button variant="outlined" size="small" type="submit">Log In</Button>
         </p>
         <p>-- or --</p>
         <p>

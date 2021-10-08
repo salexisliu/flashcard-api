@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+
 import Card from '@mui/material/Card';
 import CardActionArea from '@mui/material/CardActionArea';
 import CardActions from '@mui/material/CardActions';
@@ -9,10 +9,10 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
 import Container from '@mui/material/Container';
-import MemoryGame from './MemoryGame';
+import MemoryGame from './Study';
 import { useHistory } from 'react-router-dom';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-
+import { Link } from "react-router-dom";
 
 function Deck({deck, deleteDeck}) {
   const history = useHistory();
@@ -44,9 +44,9 @@ function Deck({deck, deleteDeck}) {
         </CardActionArea></Link>
       <CardActions>
       <Container>
-      <Route exact path="/:id/quiz" deck={deck} />
+      <Route exact path="/:id/study" deck={deck} />
           <Link style={{ textDecoration: 'none' }} to={{
-            pathname: `/decks/${deck.id}/quiz`,
+            pathname: `/decks/${deck.id}/study`,
             state: {deck}
        }}
 >

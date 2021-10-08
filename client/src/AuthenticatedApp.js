@@ -5,8 +5,9 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import CreateCardForm from './components/CreateCardForm';
 // import ExampleCardForm from './components/ExampleCardForm';
 import DeckPage from './components/DeckPage'
-import MemoryGame from './components/MemoryGame'
+import Study from './components/Study'
 import Home from './components/Home'
+import Button from '@mui/material/Button';
 
 function AuthenticatedApp({ currentUser, setCurrentUser }) {
   // const history = useHistory()
@@ -30,7 +31,7 @@ function AuthenticatedApp({ currentUser, setCurrentUser }) {
         <span>
           <NavBar/>
         </span>
-        <span>Logged in as {currentUser.username} <button onClick={handleLogout}>Logout</button></span>
+          <span style={{ color: 'white' }}>Logged in as {currentUser.username} <Button variant="contained" onClick={handleLogout}>Logout</Button></span>
       </nav>
       <Switch>
         <Route exact path="/decks">
@@ -38,7 +39,7 @@ function AuthenticatedApp({ currentUser, setCurrentUser }) {
         </Route>
       
         <Route exact path="/">
-         <Home /> </Route>
+            <Home currentUser = {currentUser.username}/> </Route>
 
 
         <Route exact path="/decks/:id"
@@ -48,9 +49,9 @@ function AuthenticatedApp({ currentUser, setCurrentUser }) {
           render={({ match }) => {
             return <CreateCardForm deckId={match.params.id}/>}} />
 
-          <Route path="/decks/:id/quiz"
+          <Route path="/decks/:id/study"
             render={({ match }) => {
-              return <MemoryGame deckId={match.params.id} />
+              return <Study deckId={match.params.id} />
             }} />
 
     
