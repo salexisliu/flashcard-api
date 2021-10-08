@@ -9,6 +9,7 @@ import Box from "@mui/material/Box";
 
 
 function Login({ setCurrentUser }) {
+  const [formErrors, setFormErrors] = useState([]);
   
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -29,9 +30,8 @@ function Login({ setCurrentUser }) {
           history.push('/decks')
         });
       } else {
-        res.json().then((errors) => {
-          console.error(errors);
-        });
+        res.json()
+          .then(errors => setFormErrors(errors.error));
       }
     });
   };
@@ -46,22 +46,28 @@ function Login({ setCurrentUser }) {
       style={{ minHeight: "50vh" }}
       padding={20}
     >
-
+     
       <Box bgcolor="white" >
         <form onSubmit={handleSubmit}>
           <Grid padding={10} container spacing={3}>
             <Grid item xs={12}>
               <Grid container spacing={2}>
+                {formErrors.length > 0
+                  ?
+                  <p key={formErrors} style={{ color: "red" }}>
+                    {formErrors}
+                  </p>
+
+                  : null}
                 <Grid item xs={12}>
                   <TextField fullWidth
                     label="username"
                     size="small"
-
-
                     name="username"
                     value={username}
                     onChange={(e) => setUsername(e.target.value)} />
                 </Grid>
+                
                 <Grid item xs={12}>
                   <TextField
                     fullWidth
