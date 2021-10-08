@@ -29,7 +29,7 @@ function Deck({deck, deleteDeck}) {
         <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
          
         </Typography>
-        <Typography variant="h5" component="div">
+            <Typography variant="h5" component="div" sx={{ minHeight: 100 }}>
           <p>{deck.title}</p>
         </Typography>
         <Typography sx={{ mb: 1.5 }} color="text.secondary">
