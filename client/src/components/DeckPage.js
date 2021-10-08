@@ -55,7 +55,9 @@ function DeckPage({ deckId }) {
 
     <h2>Title: {deck.title} </h2>
 
+<ol>
     <Cards flashcards={cards} deleteCard={deleteCard} deckId = {deckId} addCard={addCard}/>
+    </ol>
 
 
   </Container>

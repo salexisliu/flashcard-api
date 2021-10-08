@@ -58,7 +58,7 @@ const deleteDeck = (id) => {
 
       <CreateDeckForm createDeck={createDeck} />
      
-      <h1 style={{ padding: "10px" }} >Decks</h1>
+      <h2 style={{ padding: "10px" }} >My Decks</h2>
       <Grid
         container
         spacing={2}

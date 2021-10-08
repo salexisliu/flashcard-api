@@ -16,11 +16,12 @@ console.log("flashobject", flashcards)
    <div> {flashcards.map(card =>
    <>
 
-       <h4>{card.word}</h4>
-       <h5>definition: {card.definition}</h5>
-
+         <li><h4 >{card.word}</h4></li> 
+       <h5 style={{color: "grey"}}>Definition: {card.definition}</h5>
+       <Button onClick={() => deleteCard(card.id)}> Delete </Button>
+       
      
-     <Button onClick={() => deleteCard(card.id)}> Delete </Button>
+     
 
      </>
    )
