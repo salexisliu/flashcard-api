@@ -46,7 +46,6 @@ function CreateCardForm({deckId}) {
     }
 
     DATAOBJ.map((obj) => createCard(obj));
-    
 
 
 
