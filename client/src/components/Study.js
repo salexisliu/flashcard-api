@@ -60,6 +60,7 @@ function Study() {
     } else {
       setIncorrect(true)
       setAnswerToggle(false)
+      setIsToggled(false)
     }
   };
 

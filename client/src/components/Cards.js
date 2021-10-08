@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import CreateCardForm from "./CreateCardForm";
 import Button from "@material-ui/core/Button";
-
+import Box from "@mui/material/Box";
 
 function Cards({flashcards, deckId, deleteCard, addCard}) {
 
@@ -30,12 +30,13 @@ console.log("flashobject", flashcards)
 
 
 
-    <Link to={`/decks/${deckId}/edit`}><h4> Add New Cards? </h4></Link>
-{/*     
+    <Link to={`/decks/${deckId}/edit`}><Button>Add New Cards? </Button></Link>
 
-   <CreateCardForm deckId = {deckId} addCard = {addCard}/> */}
+    <Box>
+      <br></br><br></br><br></br><br></br>
 
 
+    </Box>
   </>
   )
 

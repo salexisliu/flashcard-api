@@ -2,6 +2,7 @@ import TextField from "@mui/material/TextField";
 import Container from "@mui/material/Container";
 import Button from "@material-ui/core/Button";
 import React, { useState } from "react";
+import Box from "@mui/material/Box";
 
 function CreateDeckForm({ createDeck }) {
   const [title, setTitle] = useState([]);
@@ -9,30 +10,31 @@ function CreateDeckForm({ createDeck }) {
   console.log(title);
 
   const handleSubmitForm = (e) => {
+    setTitle("")
     e.preventDefault();
     createDeck({
       title: title,
     });
+    
+
    
   };
   return (
-    <Container>
-      <h3>Create a new Deck</h3>
-
-      <form onSubmit={handleSubmitForm}>
-        <TextField
+    <Box>
+     <form onSubmit={handleSubmitForm}>
+        <h3>Create a new Deck:</h3><TextField
           name="word"
-          variant="standard"
-          label="enter title"
+          variant="filled"
+          label="Enter a title..."
           value={title} //from name
           onChange={(e) => setTitle(e.target.value)}
           type="text"
         />
-        <Button variant="contained" color="primary" type="submit">
+        <Button variant="outlined" size="large" color="primary" type="submit">
           Submit
         </Button>
-      </form>
-    </Container>
+        </form> 
+    </Box>
   );
 }
 

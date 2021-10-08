@@ -15,19 +15,15 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { Link } from "react-router-dom";
 
 function Deck({deck, deleteDeck}) {
-  const history = useHistory();
 
-  const playGame = (deck) => {
 
-<h1>game</h1>
-  }
   console.log(deck)
   return (<>
     <Grid
       item
       xs={3}>
       <Card sx={{ maxWidth: 345 }}>
-        <Link style={{ textDecoration: 'none' }} to={`/decks/${deck.id}`}><CardActionArea>
+        <Link style={{ color: "black", textDecoration: 'none' }} to={`/decks/${deck.id}`}><CardActionArea>
       <CardContent>
     
         <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>

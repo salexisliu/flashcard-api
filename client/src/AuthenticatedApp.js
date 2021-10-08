@@ -8,9 +8,11 @@ import DeckPage from './components/DeckPage'
 import Study from './components/Study'
 import Home from './components/Home'
 import Button from '@mui/material/Button';
+import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 
 function AuthenticatedApp({ currentUser, setCurrentUser }) {
-  // const history = useHistory()
+  const history = useHistory()
 
   const handleLogout = () => {
     fetch(`/logout`, {
@@ -20,7 +22,7 @@ function AuthenticatedApp({ currentUser, setCurrentUser }) {
       .then(res => {
         if (res.ok) {
           setCurrentUser(null)
-          // history.push('/')
+          history.push('/')
         }
       })
   }
@@ -31,14 +33,15 @@ function AuthenticatedApp({ currentUser, setCurrentUser }) {
         <span>
           <NavBar/>
         </span>
-          <span style={{ color: 'white' }}>Logged in as {currentUser.username} <Button variant="contained" onClick={handleLogout}>Logout</Button></span>
+          <span style={{ color: 'white' }}>Logged in as {currentUser.username} 
+          <Button variant="contained" onClick={handleLogout}>Logout</Button></span>
       </nav>
       <Switch>
         <Route exact path="/decks">
           <DecksContainer />
         </Route>
       
-        <Route exact path="/">
+        <Route exact path="/home">
             <Home currentUser = {currentUser.username}/> </Route>
 
 

@@ -53,9 +53,7 @@ function DeckPage({ deckId }) {
   console.log("deck", deck)
   return (<Container>
 
-    <h2>Deck title: {deck.title} </h2>
-
-    <h4> Deck cards</h4>
+    <h2>Title: {deck.title} </h2>
 
     <Cards flashcards={cards} deleteCard={deleteCard} deckId = {deckId} addCard={addCard}/>
 

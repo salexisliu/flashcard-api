@@ -1,13 +1,16 @@
 body {
-  background-color: #473d50;
+  background-color: #25154b;
 
 }
 .App {
   background-color: rgba(255,255,255, 0.95);
   width: 100%;
-  margin: 2em auto;
- 
+  margin: 0em auto;
+  
   min-height: 100vh;
+  position: relative;
+   overflow: hidden;
+   min-height: 100vh;
 }
 /* 
 .App-logo {

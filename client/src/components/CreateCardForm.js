@@ -8,6 +8,8 @@ import RemoveIcon from "@material-ui/icons/Remove";
 import AddIcon from "@material-ui/icons/Add";
 import { useHistory } from 'react-router-dom';
 import { Link } from "react-router-dom";
+import Grid from '@mui/material/Grid';
+import Box from '@mui/material/Box';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -27,8 +29,9 @@ function CreateCardForm({deckId}) {
 
   const handleSubmit = (e) => {
 
-    console.log("inputfields", inputField);
-    console.log("definitions", definitions);
+    console.log("submiting")
+    // console.log("inputfields", inputField);
+    // console.log("definitions", definitions);
 
     const DATAOBJ = [];
 
@@ -45,9 +48,8 @@ function CreateCardForm({deckId}) {
       DATAOBJ.push(innerDataObject);
     }
 
-    DATAOBJ.map((obj) => createCard(obj));
-
-
+    DATAOBJ.map((obj) => createCard(obj))
+    history.push(`/decks/${deckId}`)
 
 
   };
@@ -70,7 +72,8 @@ function CreateCardForm({deckId}) {
       }
     })
     .then(card => {
-      setCards(cards.concat(card))
+      setCards(cards.concat(card));
+     
     })
   };
 
@@ -87,27 +90,13 @@ function CreateCardForm({deckId}) {
       .then((results) =>
         setDefinitions(results.map((result) => result[0].shortdef[0]))
       );
+
   };
 
-  // console.log("definitions", translatedWords)
+  useEffect(() => {
+   console.log("usereffect", definitions)
+  }, [definitions]);
 
-  // const translate = (input) => {
-  //   debugger
-  //   console.log("input word", input.word)
-  //   let fetchedword = fetch(`https://www.dictionaryapi.com/api/v3/references/collegiate/json/${input.word}?key=b033b3b4-4766-4db1-8f40-6af316839bf5`)
-  //     .then(res => res.json())
-  //     .then(data => {setTranslatedWords([...translatedWords, data[0].shortdef[0]])})
-
-  // const fetchTranslations = (word) => {
-
-  //   return fetch(`https://www.dictionaryapi.com/api/v3/references/collegiate/json/${word}?key=b033b3b4-4766-4db1-8f40-6af316839bf5`)
-  //   .then(res => res.json())
-  //   .then(data => ((data[0].shortdef[0])))
-
-  //   // const dict = {word: v}
-  //   // return dict
-
-  // }
 
   const handleAddField = () => {
     setInputField([...inputField, { word: "" }]);
@@ -129,7 +118,29 @@ function CreateCardForm({deckId}) {
 
   return (
     <>
-      <Container>
+      <Link to={`/decks/${deckId}`}
+        style={{ textDecoration: 'none' }} >
+        <Button
+          style={{ margin: "5px", padding: '5px' }}
+   
+          variant="text"
+          color="primary"
+          type="button"
+        >
+          Back to Deck
+        </Button>
+      </Link>
+      <Grid
+        container
+        spacing={0}
+        direction="column"
+        style={{ padding: '50px' }}
+        display="flex"
+        style={{ margin: "30px" }}
+      >
+
+        <Grid item xs={3} >
+          
         <h3>Add new word</h3>
 
         <form className={classes.root} onSubmit={handleSubmit}>
@@ -161,29 +172,34 @@ function CreateCardForm({deckId}) {
           >
             Define
           </Button>
-        </form>
-      </Container>
-      <br></br>
-      <Container>
-        <Button
-          variant="contained"
-          color="primary"
-          type="submit"
-          onClick={handleSubmit}
-        >
-          Send
-        </Button>
+            <Button
 
-        <Link to={`/decks/${deckId}`}>
-        <Button
-          variant="contained"
-          color="primary"
-          type="button"
-        >
-          Back to Deck
-        </Button>
-        </Link>
-      </Container>
+              variant="contained"
+              color="primary"
+              type="submit"
+              onClick={handleSubmit}
+            >
+              Send
+            </Button>
+        </form>
+
+          {definitions && <Box sx={{
+          width: 800,
+          height: 300}}><ul>
+            {definitions.map(d => <li>{d}</li> )}
+          </ul>
+          </Box>
+        }
+   
+      <br></br>
+      
+        
+
+     </Grid>
+
+      </Grid>
+
+      <Box></Box>
      
     </>
   );

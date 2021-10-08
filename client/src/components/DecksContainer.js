@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link} from "react-router-dom";
 import CreateDeckForm from "./CreateDeckForm";
 import Container from "@mui/material/Container";
-
+import Box from "@mui/material/Box";
 import Deck from "./Deck"
 import Grid from '@mui/material/Grid';
 
@@ -57,8 +57,8 @@ const deleteDeck = (id) => {
       
 
       <CreateDeckForm createDeck={createDeck} />
-      <h1>Decks</h1>
-
+     
+      <h1 style={{ padding: "10px" }} >Decks</h1>
       <Grid
         container
         spacing={2}
@@ -66,6 +66,7 @@ const deleteDeck = (id) => {
         justify="flex-start"
         alignItems="flex-start"
       >
+        
 
       {decks.map((deck) => (
       <>
@@ -80,6 +81,11 @@ const deleteDeck = (id) => {
 
          
      </Container>
+     <Box>
+      <br></br><br></br><br></br><br></br>
+
+
+     </Box>
 
  </>
 
