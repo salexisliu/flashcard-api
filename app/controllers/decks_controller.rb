@@ -1,13 +1,20 @@
 class DecksController < ApplicationController
 
   # get rid of this skip before action later
-  skip_before_action :confirm_authentication
+  # skip_before_action :confirm_authentication
   before_action :find_deck, only:  [:show, :update]
   before_action :authorize_user, only: [:show, :update]
 
   def index
     decks = current_user.decks.all
-    render json: decks
+    render json: decks.to_json(
+        include: {
+          flashcards: { 
+            except: [
+              :created_at
+            ]
+         }}
+      ), status: :ok
   end
 
   def show

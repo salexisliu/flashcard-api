@@ -9,11 +9,11 @@ function NavBar() {
   return (
   <>
   <nav>
+  <NavLink className="navlink" to="/home">Home</NavLink>
   <NavLink className="navlink" to="/decks">Decks  </NavLink>
-<br></br><p></p>
-  <NavLink className="navlink" to="/">Home</NavLink>
 
-  <NavLink className="navlink" to="/new">New Card </NavLink>
+ 
+
 
   </nav>
 </>

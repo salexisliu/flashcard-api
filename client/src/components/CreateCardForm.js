@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from "react";
 import TextField from "@mui/material/TextField";
-
-import { Link } from "react-router-dom";
 import Container from "@mui/material/Container";
 import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
 import RemoveIcon from "@material-ui/icons/Remove";
 import AddIcon from "@material-ui/icons/Add";
+import { useHistory } from 'react-router-dom';
+import { Link } from "react-router-dom";
+import Grid from '@mui/material/Grid';
+import Box from '@mui/material/Box';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -19,22 +21,26 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function CreateCardForm({deckId}) {
+  const history = useHistory();
   const classes = useStyles();
-  const [inputField, setInputField] = useState([{ word: "" }, { word: "" }]);
+  const [inputField, setInputField] = useState([{ word: "" }]);
   const [definitions, setDefinitions] = useState([]);
   const [cards, setCards] = useState([]);
-
+  const [formErrors, setFormErrors] = useState("");
   const handleSubmit = (e) => {
+    e.preventDefault();
+   
 
-    console.log("inputfields", inputField);
-    console.log("definitions", definitions);
+    console.log("submiting")
+    // console.log("inputfields", inputField);
+    // console.log("definitions", definitions);
 
     const DATAOBJ = [];
 
-    for (let idx = 0; idx < definitions.length; idx++) {
+    for (let i = 0; i < definitions.length; i++) {
       const innerDataObject = {
-        word: inputField[idx]["word"],
-        definition: definitions[idx],
+        word: inputField[i]["word"],
+        definition: definitions[i],
         deck_id: deckId,
       };
       // innerDataObject.word = inputField[idx]['word']
@@ -44,8 +50,34 @@ function CreateCardForm({deckId}) {
       DATAOBJ.push(innerDataObject);
     }
 
-    DATAOBJ.map((obj) => createCard(obj));
+    DATAOBJ.map((obj) => createCard(obj))
+  
+  
+
   };
+
+
+  // const createCard = (obj) => {
+  //   console.log(obj);
+  //   return fetch("/flashcards", {
+  //     method: "POST",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //     body: JSON.stringify(obj),
+  //   })
+  //   .then((res) => {
+  //     if (res.ok) {
+  //       return res.json();
+  //     } else {
+  //       return res.json().then((errors) => Promise.reject(errors));
+  //     }
+  //   })
+  //   .then(card => {
+  //     setCards(cards.concat(card));
+     
+  //   })
+  // };
 
   const createCard = (obj) => {
     console.log(obj);
@@ -56,17 +88,26 @@ function CreateCardForm({deckId}) {
       },
       body: JSON.stringify(obj),
     })
-    .then((res) => {
-      if (res.ok) {
-        return res.json();
-      } else {
-        return res.json().then((errors) => Promise.reject(errors));
-      }
-    })
-    .then(card => {
-      setCards(cards.concat(card))
-    })
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        } else {
+          return res.json()
+            .then(errors => setFormErrors(errors.word))
+          .then((errors) => Promise.reject(errors))
+           
+        }
+      })
+      .then(card => {
+        setCards(cards.concat(card))
+          history.push(`/decks/${deckId}`)
+
+      })
   };
+
+
+
+
 
   const handleGetDefinition = (e) => {
     e.preventDefault();
@@ -81,27 +122,14 @@ function CreateCardForm({deckId}) {
       .then((results) =>
         setDefinitions(results.map((result) => result[0].shortdef[0]))
       );
+
   };
+  
 
-  // console.log("definitions", translatedWords)
+  useEffect(() => {
+   console.log("usereffect", definitions)
+  }, [definitions]);
 
-  // const translate = (input) => {
-  //   debugger
-  //   console.log("input word", input.word)
-  //   let fetchedword = fetch(`https://www.dictionaryapi.com/api/v3/references/collegiate/json/${input.word}?key=b033b3b4-4766-4db1-8f40-6af316839bf5`)
-  //     .then(res => res.json())
-  //     .then(data => {setTranslatedWords([...translatedWords, data[0].shortdef[0]])})
-
-  // const fetchTranslations = (word) => {
-
-  //   return fetch(`https://www.dictionaryapi.com/api/v3/references/collegiate/json/${word}?key=b033b3b4-4766-4db1-8f40-6af316839bf5`)
-  //   .then(res => res.json())
-  //   .then(data => ((data[0].shortdef[0])))
-
-  //   // const dict = {word: v}
-  //   // return dict
-
-  // }
 
   const handleAddField = () => {
     setInputField([...inputField, { word: "" }]);
@@ -123,7 +151,29 @@ function CreateCardForm({deckId}) {
 
   return (
     <>
-      <Container>
+      <Link to={`/decks/${deckId}`}
+        style={{ textDecoration: 'none' }} >
+        <Button
+          style={{ margin: "5px", padding: '5px' }}
+   
+          variant="text"
+          color="primary"
+          type="button"
+        >
+          Back to Deck
+        </Button>
+      </Link>
+      <Grid
+        container
+        spacing={0}
+        direction="column"
+        style={{ padding: '50px' }}
+        display="flex"
+        style={{ margin: "30px" }}
+      >
+
+        <Grid item xs={3} >
+          
         <h3>Add new word</h3>
 
         <form className={classes.root} onSubmit={handleSubmit}>
@@ -147,27 +197,52 @@ function CreateCardForm({deckId}) {
             </div>
           ))}
 
+
+            {formErrors.length > 0
+              ? formErrors.map((err) => (
+                <p key={err} style={{ color: "red" }}>
+                  {err}
+                </p>
+              ))
+              : null}
+
           <Button
             variant="contained"
             color="primary"
-            type="submit"
+            type="button"
             onClick={handleGetDefinition}
           >
             Define
           </Button>
+            <Button
+
+              variant="contained"
+              color="primary"
+              type="submit"
+              onClick={handleSubmit}
+            >
+              Send
+            </Button>
         </form>
-      </Container>
+
+          {definitions && <Box sx={{
+          width: 800,
+          height: 300}}><ul>
+            {definitions.map(d => <li>{d}</li> )}
+          </ul>
+          </Box>
+        }
+   
       <br></br>
-      <Container>
-        <Button
-          variant="contained"
-          color="primary"
-          type="submit"
-          onClick={handleSubmit}
-        >
-          Join and Send
-        </Button>
-      </Container>
+      
+        
+
+     </Grid>
+
+      </Grid>
+
+      <Box></Box>
+     
     </>
   );
 }
