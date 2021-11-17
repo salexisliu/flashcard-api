@@ -85,7 +85,7 @@ function Study() {
         style={{ minHeight: "50vh" }}
       >
         <Grid item xs={8}>
-          <h1>Study</h1>
+          <h1>{state.deck.title}</h1>
           <Card
             alignItems="center"
             justify="center"
@@ -109,7 +109,7 @@ function Study() {
                   variant="h5"
                   component="div"
                 >
-                  {isToggled && <>{fcard.word}</>}
+                  {isToggled && <><h1 style={{ color: "violet" }}>{fcard.word}</h1></>}
                 </Typography>
                 <Typography
                   sx={{ mb: 1.5 }}

@@ -27,8 +27,6 @@ function ExampleCardForm() {
     e.preventDefault();
     console.log("FORM INPUT WORDS", inputField)
     inputField.map(input => fetchTranslations(input.word))
-   
-    
   }
 
   const fetchTranslations = (word) => {

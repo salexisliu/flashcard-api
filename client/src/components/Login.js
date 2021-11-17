@@ -7,6 +7,8 @@ import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
 
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
 function Login({ setCurrentUser }) {
   const [formErrors, setFormErrors] = useState([]);
